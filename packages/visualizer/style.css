@@ -1,0 +1,12 @@
+:root { color-scheme: dark; --bg: #07090d; --fg: #9aa4b2; --line: #1c222c; }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); font: 12px/1.4 system-ui, sans-serif; overflow: hidden; }
+body { display: flex; flex-direction: column; }
+#bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 6px 10px; border-bottom: 1px solid var(--line); }
+#bar select, #bar button, .file { background: #0d1118; color: var(--fg); border: 1px solid var(--line); border-radius: 4px; padding: 3px 8px; font: inherit; cursor: pointer; }
+.file input { display: none; }
+#seek { flex: 1 1 200px; min-width: 120px; accent-color: #6d8bb3; }
+#clock { font-variant-numeric: tabular-nums; min-width: 90px; }
+.chk { display: inline-flex; gap: 4px; align-items: center; }
+canvas { flex: 1 1 auto; width: 100%; min-height: 0; display: block; }
+#readout { padding: 5px 10px; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

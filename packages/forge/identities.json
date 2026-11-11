@@ -1,0 +1,128 @@
+{
+  "$comment": "Visual and musical identities for agents. Identity comes from explicit configuration (byAgentType, byAgentId) or from reliable event metadata (actor.type / actor.agentType), never from free text. Initial artistic presets, not rigid rules. Colours agreed 2026-11-08: Forge royal purple, Smith copper-gold with temperature/verification states, Scout turquoise; the core is the luminous objective.",
+  "main": "forge",
+  "core": "core",
+  "byAgentType": {
+    "implementer": "smith",
+    "test-runner": "smith",
+    "general-purpose": "smith",
+    "worker": "smith",
+    "reviewer": "forge",
+    "Plan": "forge",
+    "architect": "forge",
+    "scout": "scout",
+    "researcher": "scout",
+    "Explore": "scout",
+    "web-fetch": "scout",
+    "claude-code-guide": "scout"
+  },
+  "byAgentId": {},
+  "fallback": "smith",
+  "presets": {
+    "core": {
+      "label": "Objective",
+      "description": "The central objective: a luminous core that gains internal structure as work is verified.",
+      "seed": "tesseract",
+      "dim": 4,
+      "hue": 48,
+      "sat": 58,
+      "light": 80,
+      "spin": {
+        "xw": 0.05,
+        "zw": 0.035,
+        "xy": 0.02
+      },
+      "projectionDistance": 3,
+      "faceAlpha": 0.08,
+      "growthPreference": [
+        "connect",
+        "nest"
+      ],
+      "music": {
+        "instrument": "coreSine",
+        "register": -1,
+        "role": "core"
+      }
+    },
+    "forge": {
+      "label": "Forge",
+      "description": "Planning, reasoning, review and architecture: royal-purple unfolding multidimensional geometry; harmonic foundation.",
+      "seed": "24-cell",
+      "dim": 4,
+      "hue": 272,
+      "sat": 62,
+      "light": 66,
+      "spin": {
+        "xw": 0.13,
+        "zw": 0.08,
+        "xy": 0.04
+      },
+      "projectionDistance": 3.2,
+      "faceAlpha": 0.05,
+      "growthPreference": [
+        "connect",
+        "nest"
+      ],
+      "music": {
+        "instrument": "additivePad",
+        "register": 0,
+        "role": "foundation"
+      }
+    },
+    "smith": {
+      "label": "Smith",
+      "description": "Coding and implementation: copper-gold crystalline structures with temperature (recent work glows) and verification (tested material cools and sharpens); tuned metallic rhythm.",
+      "seed": "cube",
+      "dim": 3,
+      "hue": 32,
+      "sat": 78,
+      "light": 62,
+      "thermal": {
+        "hotHue": 50,
+        "hotLight": 86,
+        "verifiedHue": 28,
+        "verifiedSat": 70,
+        "failHue": 6
+      },
+      "spin": {
+        "xz": 0.11,
+        "xy": 0.03
+      },
+      "faceAlpha": 0.07,
+      "growthPreference": [
+        "nest",
+        "subdivide",
+        "connect"
+      ],
+      "music": {
+        "instrument": "metalStrike",
+        "register": 1,
+        "role": "rhythm"
+      }
+    },
+    "scout": {
+      "label": "Scout",
+      "description": "Research and discovery: turquoise branching structures, expanding networks; flowing exploratory melody.",
+      "seed": "icosahedron",
+      "dim": 3,
+      "hue": 174,
+      "sat": 70,
+      "light": 60,
+      "spin": {
+        "yz": 0.09,
+        "xy": 0.06
+      },
+      "faceAlpha": 0.03,
+      "growthPreference": [
+        "satellite",
+        "connect",
+        "subdivide"
+      ],
+      "music": {
+        "instrument": "glideFlute",
+        "register": 2,
+        "role": "motif"
+      }
+    }
+  }
+}

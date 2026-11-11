@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Forge GL smoke</title>
+<style>html,body{margin:0;height:100%;background:#04050a;color:#9ab}canvas{width:100vw;height:100vh;display:block}pre{position:fixed;left:8px;top:8px;margin:0;font:12px monospace;color:#cde}</style>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+</head><body><canvas id="c"></canvas><pre id="s">starting</pre>
+<script type="module">
+import { FrameBuilder, hslToRgb } from "./src/frame.js";
+import { GLRenderer } from "./src/render-gl.js";
+const canvas = document.getElementById("c"), out = document.getElementById("s");
+const gl = new GLRenderer(canvas);
+if (!gl.available) { out.textContent = "WebGL2 unavailable"; throw new Error("no webgl2"); }
+addEventListener("resize", () => gl.resize());
+const fb = new FrameBuilder();
+const V = [];
+for (const x of [-1, 1]) for (const y of [-1, 1]) for (const z of [-1, 1]) V.push([x, y, z]);
+const E = [];
+for (let i = 0; i < 8; i++) for (let j = i + 1; j < 8; j++) { let d = 0; for (let k = 0; k < 3; k++) if (V[i][k] !== V[j][k]) d++; if (d === 1) E.push([i, j]); }
+const cols = [hslToRgb(190, 90, 60), hslToRgb(300, 80, 65), hslToRgb(45, 95, 60)];
+const widths = [1, 2, 4];
+const t0 = performance.now();
+function frame(now) {
+  const t = (now - t0) / 1000;
+  fb.reset();
+  E.forEach(([i, j], n) => fb.line(V[i], V[j], cols[n % 3], 0.9, widths[n % 3]));
+  fb.polygon([[0, 1.5, 0], [1, 1.2, 0.5], [1.4, 1.6, -0.3], [0.2, 2.2, -0.6], [-0.9, 1.7, 0.1], [-1, 1.2, 0.6]], hslToRgb(280, 80, 55), 0.35);
+  for (let i = 0; i < 50; i++) {
+    const a = i * 2.399 + t * 0.3, r = 0.5 + (i % 7) * 0.25;
+    fb.point([Math.cos(a) * r, Math.sin(i * 0.7 + t) * 1.2, Math.sin(a) * r], hslToRgb(i * 7 + 20, 90, 65), 1, 0.12);
+  }
+  fb.ring([0, 0, 0], [0, 1, 0], 2, hslToRgb(160, 80, 60), 0.8, 2);
+  fb.ring([0, 0, 0], [1, 1, 0], 2.4, hslToRgb(20, 90, 60), 0.7, 1);
+  const f = fb.build();
+  const a = t * 0.25;
+  gl.render(f, { position: [Math.cos(a) * 6, 2.5, Math.sin(a) * 6], target: [0, 0.5, 0], up: [0, 1, 0], fov: 0.9, near: 0.05, far: 200 });
+  const s = gl.stats();
+  out.textContent = "ms " + s.ms.toFixed(2) + "  lines " + s.lines + "  faces " + s.faces + "  points " + s.points;
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script></body></html>

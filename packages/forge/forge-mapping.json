@@ -1,0 +1,332 @@
+{
+  "$comment": "Configurable artistic mapping from observable development events to geometric operations. These are artistic interpretations of observed activity, not measurements of thought. Edit freely; the composer reads this at startup.",
+  "operations": {
+    "read": {
+      "op": "reveal",
+      "growth": 0.25,
+      "spin": 0.15
+    },
+    "search": {
+      "op": "branch",
+      "growth": 0.35,
+      "spin": 0.2
+    },
+    "browse": {
+      "op": "reveal",
+      "growth": 0.25,
+      "spin": 0.15
+    },
+    "plan": {
+      "op": "scaffold",
+      "growth": 0.5,
+      "spin": 0.1
+    },
+    "ask": {
+      "op": "hold",
+      "growth": 0,
+      "spin": 0
+    },
+    "edit": {
+      "op": "transform",
+      "growth": 0.6,
+      "spin": 0.35
+    },
+    "create": {
+      "op": "assemble",
+      "growth": 1,
+      "spin": 0.3
+    },
+    "run": {
+      "op": "pulse",
+      "growth": 0.2,
+      "spin": 0.25
+    },
+    "build": {
+      "op": "pulse",
+      "growth": 0.3,
+      "spin": 0.25
+    },
+    "test": {
+      "op": "wave",
+      "growth": 0.2,
+      "spin": 0.1
+    },
+    "commit": {
+      "op": "seal",
+      "growth": 0.5,
+      "spin": 0
+    },
+    "delegate": {
+      "op": "spawn",
+      "growth": 0.3,
+      "spin": 0.1
+    },
+    "publish": {
+      "op": "seal",
+      "growth": 0.3,
+      "spin": 0
+    },
+    "schedule": {
+      "op": "reveal",
+      "growth": 0.1,
+      "spin": 0.05
+    },
+    "other": {
+      "op": "reveal",
+      "growth": 0.2,
+      "spin": 0.1
+    }
+  },
+  "categories": {
+    "$comment": "work-category → geometric tendency and hue (hue falls back to the taxonomy hint when omitted). debugging distorts; fixing (edit while tension > 0) reorganizes.",
+    "research": {
+      "op": "branch",
+      "hue": 200
+    },
+    "planning": {
+      "op": "scaffold",
+      "hue": 265
+    },
+    "ui-design": {
+      "op": "assemble",
+      "hue": 320
+    },
+    "frontend": {
+      "op": "assemble",
+      "hue": 190
+    },
+    "backend": {
+      "op": "assemble",
+      "hue": 150
+    },
+    "database": {
+      "op": "assemble",
+      "hue": 170
+    },
+    "api": {
+      "op": "assemble",
+      "hue": 180
+    },
+    "testing": {
+      "op": "wave",
+      "hue": 130
+    },
+    "debugging": {
+      "op": "distort",
+      "hue": 15
+    },
+    "security": {
+      "op": "scaffold",
+      "hue": 350
+    },
+    "performance": {
+      "op": "transform",
+      "hue": 45
+    },
+    "documentation": {
+      "op": "reveal",
+      "hue": 60
+    },
+    "deployment-prep": {
+      "op": "seal",
+      "hue": 48
+    },
+    "tooling": {
+      "op": "assemble",
+      "hue": 95
+    },
+    "localization": {
+      "op": "transform",
+      "hue": 280
+    },
+    "data-analysis": {
+      "op": "branch",
+      "hue": 220
+    }
+  },
+  "growth": {
+    "$comment": "Internal complexity stages applied when accumulated growth crosses each threshold. Beyond maxEdges only rotation/colour change, never geometry (bounded complexity).",
+    "thresholds": [
+      1.5,
+      4,
+      8,
+      13,
+      19,
+      26,
+      34,
+      43
+    ],
+    "stages": [
+      "connect",
+      "subdivide",
+      "nest",
+      "satellite",
+      "connect",
+      "subdivide",
+      "satellite",
+      "connect"
+    ],
+    "maxEdges": 900,
+    "maxSatellites": 6,
+    "satelliteScale": 0.28
+  },
+  "dynamics": {
+    "baseSpin": 0.12,
+    "spinDecay": 0.35,
+    "distortDecay": 0.6,
+    "relaxRate": 1.4,
+    "tensionDecay": 0.08,
+    "resolveSeconds": 6
+  },
+  "ripples": {
+    "toolResult": {
+      "strength": 0.35,
+      "life": 2600
+    },
+    "toolFailure": {
+      "strength": 0.8,
+      "life": 3600,
+      "hue": 8,
+      "sign": -1
+    },
+    "testPass": {
+      "strength": 1,
+      "life": 4200,
+      "hue": 130,
+      "ring": true
+    },
+    "testFail": {
+      "strength": 1,
+      "life": 4200,
+      "hue": 5,
+      "sign": -1,
+      "ring": true
+    },
+    "commit": {
+      "strength": 0.9,
+      "life": 4800,
+      "hue": 48,
+      "ring": true
+    },
+    "agentStop": {
+      "strength": 0.6,
+      "life": 3200,
+      "ring": true
+    },
+    "turnStop": {
+      "strength": 0.7,
+      "life": 4000,
+      "hue": 150,
+      "ring": true
+    },
+    "taskEnd": {
+      "strength": 1,
+      "life": 6000,
+      "hue": 150,
+      "ring": true
+    },
+    "agentStart": {
+      "strength": 0.5,
+      "life": 2600,
+      "ring": true
+    }
+  },
+  "layout": {
+    "$comment": "One central origin (the objective core) at the origin; the main agent and top-level subagents orbit it; child agents orbit their parent. Units: core radius 1.",
+    "coreRadius": 0.7,
+    "mainOrbit": 2.3,
+    "mainScale": 0.5,
+    "agentOrbit": 2.7,
+    "agentScale": 0.5,
+    "childOrbit": 1,
+    "childScale": 0.55,
+    "dockedOrbitScale": 0.72,
+    "dockedShrink": 0.78,
+    "tetherEdges": 3
+  },
+  "verification": {
+    "$comment": "Workshop ideas: touched material is hot and unverified; passing tests verify the reached region and cool it; failures mark it unstable.",
+    "heatHalfLifeSec": 75,
+    "verifiedReinforce": 0.12,
+    "failWeaken": 0.2,
+    "coreGrowthPerPass": 1.2,
+    "coreGrowthPerCommit": 1.5
+  },
+  "universe": {
+    "$comment": "As above, so below: one shared coordinate system. The plane y=0 is the reference lattice (planning); crystals (implementation) rise from its sites; roots (research) grow beneath; verified crystals gain reflections beneath; commits seal membranes over verified apexes; a 4D field turns through the origin. Values are artistic choices, read by universe.js at startup (defaults live in UNIVERSE_DEFAULTS).",
+    "spacing": 1,
+    "plane": {
+      "initialRings": 1,
+      "maxRings": 5,
+      "revealsPerRing": 2,
+      "settleFrom": 0.35,
+      "ringThresholds": [
+        0,
+        1,
+        3,
+        6,
+        10,
+        15
+      ],
+      "clearingRings": 1
+    },
+    "origin": {
+      "seed": "octahedron",
+      "scale": 0.32,
+      "maxEdges": 220
+    },
+    "field": {
+      "seed": "24-cell",
+      "scale": 1.35,
+      "projectionDistance": 3.2,
+      "maxEdges": 420
+    },
+    "seed": {
+      "scale": 0.16,
+      "lift": 0.22,
+      "shrinkOnDock": 0.8
+    },
+    "crystal": {
+      "radius": 0.3,
+      "stageHeight": 0.5,
+      "twist": 0.3141592653589793,
+      "taper": 0.88,
+      "maxStages": 5,
+      "maxEdges": 160,
+      "nestScale": 0.42,
+      "sidesByIdentity": {
+        "smith": 4,
+        "forge": 6,
+        "scout": 3
+      },
+      "defaultSides": 4,
+      "homeRadius": 1
+    },
+    "root": {
+      "maxVertices": 160,
+      "segment": [
+        0.45,
+        0.8
+      ],
+      "downBias": 0.55,
+      "branchChance": 0.3,
+      "spread": 0.55
+    },
+    "membrane": {
+      "max": 8,
+      "lift": 0.08
+    },
+    "agents": {
+      "radiusRings": 3,
+      "childOffset": 1
+    },
+    "links": {
+      "reviewPerCrystal": 2
+    },
+    "caps": {
+      "bodies": 90,
+      "links": 400
+    },
+    "waveReach": 6
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "@alexandria/forge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The Forge: event-driven multidimensional geometric composition (laboratory, composer, ripple field, Canvas renderer).",
+  "type": "module",
+  "license": "Apache-2.0",
+  "author": "Alexandria Ltd",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Coachalex369/alexandria-resonance.git",
+    "directory": "packages/forge"
+  },
+  "homepage": "https://github.com/Coachalex369/alexandria-resonance#readme"
+}

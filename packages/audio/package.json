@@ -1,0 +1,19 @@
+{
+  "name": "@alexandria/audio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Generative music prototype: taxonomy events → procedural Web Audio synthesis. Off by default, mute and volume controls, no samples or copyrighted material.",
+  "type": "module",
+  "main": "src/music.js",
+  "scripts": {
+    "test": "node --test \"test/*.test.js\""
+  },
+  "license": "Apache-2.0",
+  "author": "Alexandria Ltd",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Coachalex369/alexandria-resonance.git",
+    "directory": "packages/audio"
+  },
+  "homepage": "https://github.com/Coachalex369/alexandria-resonance#readme"
+}

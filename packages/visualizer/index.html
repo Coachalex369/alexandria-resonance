@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alexandria Resonance - Canvas prototype</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="bar">
+  <select id="rec" title="Recording"></select>
+  <label class="file">Open file<input id="file" type="file" accept=".jsonl,.events.jsonl,.json"></label>
+  <button id="play" type="button">Play</button>
+  <select id="speed" title="Speed"><option value="1">1x</option><option value="10">10x</option><option value="30" selected>30x</option><option value="100">100x</option></select>
+  <input id="seek" type="range" min="0" max="1000" value="0" step="1">
+  <span id="clock">0:00 / 0:00</span>
+  <label class="chk"><input id="live" type="checkbox"> live tail</label>
+  <select id="palette" title="Palette"></select>
+</header>
+<canvas id="c"></canvas>
+<footer id="readout"></footer>
+<script type="module" src="viz.js"></script>
+</body>
+</html>

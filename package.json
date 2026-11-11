@@ -1,0 +1,96 @@
+{
+  "name": "alexandria-resonance",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Alexandria Resonance: a free, immersive generative-art application that turns live Claude Code activity into evolving 4D geometry, crystal and root systems over a reflection plane, with original generative music. As Above, So Below.",
+  "type": "module",
+  "main": "desktop/main.js",
+  "workspaces": [
+    "packages/event-engine",
+    "packages/taxonomy",
+    "packages/geometry",
+    "packages/forge",
+    "packages/audio",
+    "packages/visualizer",
+    "packages/live"
+  ],
+  "scripts": {
+    "test": "node --test \"packages/*/test/*.test.js\" \"test/*.test.js\"",
+    "start": "node tools/serve-demo.js",
+    "demo": "node tools/serve-demo.js",
+    "desktop": "electron .",
+    "dist:zip": "node tools/vendor-three.mjs && electron-builder --win zip --x64",
+    "dist:dir": "node tools/vendor-three.mjs && electron-builder --win --x64 --dir",
+    "bench:forge": "node tools/forge-bench.js",
+    "demo:forge-session": "node tools/forge-demo-session.js",
+    "demo:synth": "node tools/synth-recording.js demo/recordings/synthetic-multi-agent.events.jsonl",
+    "demo:record": "node packages/event-engine/bin/engine.js ingest claude-hooks \"%USERPROFILE%/.claude/eta/events.jsonl\" --out demo/recordings/live-hooks.events.jsonl",
+    "engine": "node packages/event-engine/bin/engine.js",
+    "protocol:check": "node --test test/protocol-drift.test.js",
+    "collector:install": "node tools/install-collector-v3.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "Apache-2.0",
+  "author": "Alexandria Ltd",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Coachalex369/alexandria-resonance.git"
+  },
+  "homepage": "https://github.com/Coachalex369/alexandria-resonance#readme",
+  "dependencies": {
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "electron": "^45.2.3",
+    "electron-builder": "^26.18.0"
+  },
+  "build": {
+    "appId": "com.alexandrialtd.visualizer",
+    "productName": "Alexandria Visualizer",
+    "copyright": "Alexandria Ltd.",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "desktop/**",
+      "tools/serve-demo.js",
+      "tools/live-feed.js",
+      "packages/live/**",
+      "packages/forge/**",
+      "packages/geometry/**",
+      "packages/audio/**",
+      "packages/visualizer/**",
+      "packages/event-engine/**",
+      "packages/taxonomy/**",
+      "!packages/**/test/**",
+      "!packages/**/README.md",
+      "!packages/taxonomy/bin/**",
+      "demo/recordings/**",
+      "collector/**",
+      "tools/install-collector-v3.mjs",
+      "PROTOCOL_VERSION.json",
+      "package.json",
+      "node_modules/three/package.json",
+      "node_modules/three/build/three.module.js",
+      "node_modules/three/build/three.core.js",
+      "build-vendor/three-addons/**"
+    ],
+    "asar": true,
+    "npmRebuild": false,
+    "win": {
+      "target": [
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "Alexandria-Visualizer-${version}-win-x64.${ext}"
+    },
+    "publish": null
+  }
+}

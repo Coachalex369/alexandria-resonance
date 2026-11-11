@@ -1,0 +1,13 @@
+{
+  "name": "@alexandria/live",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "author": "Alexandria Ltd",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Coachalex369/alexandria-resonance.git",
+    "directory": "packages/live"
+  },
+  "homepage": "https://github.com/Coachalex369/alexandria-resonance#readme"
+}

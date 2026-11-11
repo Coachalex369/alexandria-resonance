@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Forge</title>
+<link rel="stylesheet" href="forge.css" />
+</head>
+<body>
+<canvas id="cv" aria-label="The Forge: event-driven geometric composition"></canvas>
+<aside id="panel">
+  <h1>The Forge <span class="sub">event-driven geometric composition</span></h1>
+  <section>
+    <label>Recording <select id="recording"></select></label>
+    <div class="row">
+      <button id="play">Play</button>
+      <label>Speed <input id="speed" type="range" min="1" max="120" value="24" /><span id="speedv">24x</span></label>
+    </div>
+    <input id="seek" type="range" min="0" max="1000" value="0" />
+    <div id="pos" class="mono">0:00 / 0:00</div>
+  </section>
+  <section>
+    <div class="row">
+      <label><input id="orbit" type="checkbox" checked /> auto-orbit</label>
+      <label><input id="facesOn" type="checkbox" checked /> faces</label>
+      <label><input id="traceOn" type="checkbox" checked /> traces</label>
+      <label><input id="reduced" type="checkbox" /> reduced motion</label>
+    </div>
+    <div class="row">
+      <label>Palette <select id="palette"><option value="identity">identity + category</option><option value="identity-only">identity only</option><option value="category">category</option></select></label>
+      <label>Quality <select id="quality"><option value="1">full</option><option value="0.75">0.75</option><option value="0.5">0.5</option></select></label>
+    </div>
+  </section>
+  <section>
+    <div class="row">
+      <button id="audioEnable">Enable audio</button>
+      <label><input id="mute" type="checkbox" checked /> muted</label>
+      <label>Vol <input id="volume" type="range" min="0" max="100" value="40" /></label>
+    </div>
+    <div id="music" class="mono dim">audio off (optional; independent of other apps' alerts)</div>
+  </section>
+  <section>
+    <h2>Agents</h2>
+    <ul id="agents" class="mono"></ul>
+  </section>
+  <section>
+    <h2>Inspect <span class="sub">click a vertex</span></h2>
+    <div id="inspect" class="mono dim">nothing selected</div>
+  </section>
+  <section>
+    <h2>Readout</h2>
+    <div id="readout" class="mono"></div>
+    <div class="row"><button id="manifest">Export manifest</button><button id="png">Save PNG</button></div>
+  </section>
+  <p class="note">Artistic interpretation of observed development events; not a depiction of thought. All data stays local.</p>
+</aside>
+<script type="module" src="forge.js"></script>
+</body>
+</html>

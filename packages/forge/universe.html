@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Alexandria Resonance — As Above, So Below</title>
+<link rel="stylesheet" href="universe.css" />
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+</head>
+<body data-mode="live" data-source="replay">
+<canvas id="cv" aria-label="The Forge universe: one origin, one plane, structures above and below, a four-dimensional field through it"></canvas>
+
+<header id="top">
+  <div class="brand">Alexandria Resonance <span class="sep">·</span> <strong>As Above, So Below</strong> <span class="tag" id="brandTag">recording</span></div>
+  <span id="sourceNote" class="hint" role="status"></span>
+  <div id="sourceSwitch" role="tablist" aria-label="Source">
+    <button id="srcLive" role="tab" aria-selected="false" title="Live Claude Code activity (L)">Live</button>
+    <button id="srcReplay" role="tab" aria-selected="true" title="Replay a recording or a real session (L)">Replay</button>
+  </div>
+  <span id="liveStatus" class="mono" hidden></span>
+  <div id="modeSwitch" role="tablist" aria-label="View">
+    <button id="modeLive" role="tab" aria-selected="true">Unfolding</button>
+    <button id="modeArt" role="tab" aria-selected="false">Finished artwork</button>
+  </div>
+  <button id="panelToggle" aria-expanded="true" aria-controls="side" title="Show or hide controls">Controls</button>
+</header>
+
+<div id="objective" aria-live="polite">
+  <div id="stage" class="stage">Loading…</div>
+  <div id="now" class="now"></div>
+  <div id="camphase" class="cam"></div>
+</div>
+
+<aside id="side">
+  <section id="replaySection">
+    <h2>Replay</h2>
+    <label class="stack">Real sessions
+      <select id="realSessions" aria-label="Real sessions"><option value="">Demo recording</option></select>
+    </label>
+    <p class="hint" id="replayHint">Replays a past Claude Code session from the local activity log.</p>
+  </section>
+  <section>
+    <h2>Agents</h2>
+    <ul id="agents"></ul>
+  </section>
+  <section>
+    <h2>Camera</h2>
+    <label><input id="director" type="checkbox" checked /> camera director (discovery arc)</label>
+    <div class="row">
+      <button id="camGround">Ground view</button>
+      <button id="camOverview">From above</button>
+      <button id="camResume">Resume director</button>
+    </div>
+    <p class="hint">Drag to orbit (pauses the director) · wheel to zoom · click a vertex to inspect · Space play/pause (replay) · G gallery · L live/replay</p>
+  </section>
+  <section>
+    <h2>View</h2>
+    <label><input id="facesOn" type="checkbox" checked /> luminous membranes</label>
+    <label><input id="linksOn" type="checkbox" checked /> links between structures</label>
+    <label><input id="bloomOn" type="checkbox" checked /> bloom</label>
+    <label><input id="autoGallery" type="checkbox" checked /> switch to artwork when the objective completes</label>
+    <label><input id="reduced" type="checkbox" /> reduced motion</label>
+    <label><input id="privacyOn" type="checkbox" /> Privacy mode: hide project names</label>
+  </section>
+  <section>
+    <h2>Music <span class="hint">(optional, off by default; independent of other apps' alerts)</span></h2>
+    <div class="row">
+      <button id="musicToggle">Enable music</button>
+      <label>Volume <input id="volume" type="range" min="0" max="100" value="45" /></label>
+    </div>
+    <div id="music" class="mono hint">music off</div>
+  </section>
+  <section>
+    <h2>Inspect <span class="hint">click a vertex</span></h2>
+    <div id="inspect" class="mono hint">nothing selected</div>
+  </section>
+  <section>
+    <h2>Readout</h2>
+    <div id="readout" class="mono"></div>
+    <div class="row">
+      <button id="savePng">Save PNG</button>
+      <button id="saveManifest">Save manifest</button>
+    </div>
+  </section>
+  <p class="note" id="sideNote">Every structure is traceable to a labelled synthetic event. Artistic interpretation of observed activity, not a depiction of thought. All data stays local.</p>
+</aside>
+
+<footer id="transport">
+  <button id="play" title="Play / pause (Space)">Play</button>
+  <button id="restart" title="Restart from the beginning">Restart</button>
+  <label class="speed">Speed <input id="speed" type="range" min="1" max="60" value="6" /><span id="speedv">6×</span></label>
+  <button id="preview" title="Play the whole session in about ninety seconds">Preview 90 s</button>
+  <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Timeline" />
+  <span id="time" class="mono">0:00 / 0:00</span>
+  <button id="finale" title="Jump to the finished artwork">Jump to finale</button>
+</footer>
+
+<footer id="strip" aria-label="Live sessions">
+  <div id="chips" role="group" aria-label="Sessions"></div>
+  <span id="pinState" class="hint"></span>
+  <button id="follow" title="Unpin and follow the most active session">Follow most active</button>
+</footer>
+
+<div id="gallery">
+  <div class="gtitle"><span id="gTask">Finished artwork</span><span id="gMeta" class="mono"></span></div>
+  <div class="gbuttons">
+    <button id="gHistory">History</button>
+    <button id="gPng">Save PNG</button>
+    <button id="gManifest">Manifest</button>
+    <button id="gBack">Back to unfolding</button>
+  </div>
+  <div id="history" class="mono" hidden></div>
+</div>
+<div id="nogl" hidden>This demonstration needs WebGL2. Please open it in a current desktop browser with hardware acceleration enabled.</div>
+
+<script type="module" src="universe.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+node_modules/
+dist/
+build/
+build-vendor/
+data/
+*.log
+.DS_Store
+Thumbs.db
+.env*
+
+# recordings are ignored except the ones shipped in demo/recordings/
+*.events.jsonl
+!demo/recordings/*.events.jsonl

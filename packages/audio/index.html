@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alexandria Audio Prototype</title>
+<style>
+  :root { --bg: #0f1016; --fg: #e8e6df; --dim: #8a8f9c; --accent: #d9a441; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.4 system-ui, sans-serif; padding: 24px 16px; max-width: 880px; margin-inline: auto; }
+  h1 { font-size: 20px; margin: 0 0 4px; } p { color: var(--dim); margin: 0 0 16px; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin: 10px 0; }
+  button, select, input[type=range] { font: inherit; } button { background: #1c1e2a; color: var(--fg); border: 1px solid #333748; border-radius: 6px; padding: 8px 14px; cursor: pointer; }
+  button.primary { background: var(--accent); color: #111; border-color: var(--accent); font-weight: 600; }
+  .log { font: 12px/1.5 ui-monospace, monospace; background: #13141c; border: 1px solid #222634; border-radius: 8px; padding: 10px; height: 280px; overflow: auto; white-space: pre; }
+  .meter { height: 8px; background: #222634; border-radius: 4px; overflow: hidden; } .meter > div { height: 100%; background: var(--accent); width: 0; transition: width .3s; }
+  label { color: var(--dim); font-size: 13px; }
+</style>
+</head>
+<body>
+  <h1>Generative music prototype</h1>
+  <p>Original procedural sound only. Audio stays <strong>off</strong> until you press Enable. Volume and mute are always available.</p>
+  <div class="row">
+    <button id="enable" class="primary">Enable audio</button>
+    <button id="mute">Mute</button>
+    <label>Volume <input id="vol" type="range" min="0" max="1" step="0.01" value="0.5"></label>
+    <label>Recording <select id="rec"><option value="/demo/recordings/synthetic-multi-agent.events.jsonl">synthetic multi-agent</option></select></label>
+    <label>Speed <select id="speed"><option>1</option><option>5</option><option selected>15</option><option>30</option></select></label>
+    <button id="play">Play</button><button id="pause">Pause</button>
+  </div>
+  <div class="row"><label>Tension</label><div class="meter" style="flex:1"><div id="tension"></div></div><span id="bpm">72 bpm</span></div>
+  <div id="log" class="log"></div>
+<script type="module">
+  import { Replayer } from "../event-engine/src/replay.js";
+  import { Synth } from "./src/synth.js";
+  const $ = (id) => document.getElementById(id);
+  const synth = new Synth();
+  let replayer = null;
+  const log = (s) => { const el = $("log"); el.textContent += s + "\n"; el.scrollTop = el.scrollHeight; };
+  $("enable").onclick = async () => { await synth.enable(); $("enable").textContent = "Audio enabled"; $("enable").disabled = true; log("audio enabled (user gesture)"); };
+  $("mute").onclick = () => { synth.setMuted(!synth.muted); $("mute").textContent = synth.muted ? "Unmute" : "Mute"; };
+  $("vol").oninput = (e) => synth.setVolume(Number(e.target.value));
+  async function load() {
+    const text = await (await fetch($("rec").value)).text();
+    const events = text.split("\n").filter(Boolean).map((l) => JSON.parse(l));
+    synth.setProject(events[0]?.session?.project || "alexandria");
+    replayer = new Replayer(events, { speed: Number($("speed").value) });
+    replayer.on("event", ({ event, index, total }) => { const d = synth.onEvent(event); $("tension").style.width = `${Math.round(d.tension * 100)}%`; $("bpm").textContent = `${d.bpm} bpm`; if (d.notes.length) log(`${String(index + 1).padStart(3)}/${total} ${event.kind.padEnd(12)} ${d.voice.padEnd(11)} ${d.category.padEnd(14)} ${d.instrument.padEnd(10)} ${d.notes.length} notes${d.tensionDelta ? " tension " + d.tensionDelta : ""}`); });
+    replayer.on("done", () => log("recording finished"));
+    log(`loaded ${events.length} events (${events[0]?.session?.project}) key root ${synth.character.root} mode ${synth.character.mode}`);
+  }
+  $("play").onclick = async () => { if (!replayer || replayer.state === "done") await load(); if (replayer.state === "paused") replayer.resume(); else replayer.start(); };
+  $("pause").onclick = () => replayer?.pause();
+  $("speed").onchange = () => replayer?.setSpeed(Number($("speed").value));
+  $("rec").onchange = () => { replayer?.pause(); replayer = null; $("log").textContent = ""; };
+</script>
+</body>
+</html>

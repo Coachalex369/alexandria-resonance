@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Alexandria Resonance — The Forge</title>
+<link rel="stylesheet" href="session.css" />
+</head>
+<body data-mode="live">
+<canvas id="cv" aria-label="The Forge: one objective, many agents, one evolving composition"></canvas>
+
+<header id="top">
+  <div class="brand">Alexandria Resonance <span class="sep">·</span> <strong>The Forge</strong> <span class="tag">synthetic demo session</span></div>
+  <div id="modeSwitch" role="tablist" aria-label="View">
+    <button id="modeLive" role="tab" aria-selected="true">Live session</button>
+    <button id="modeArt" role="tab" aria-selected="false">Finished artwork</button>
+  </div>
+  <button id="panelToggle" aria-expanded="true" aria-controls="side" title="Show or hide controls">Controls</button>
+</header>
+
+<div id="objective" aria-live="polite">
+  <div id="stage" class="stage">Loading synthetic session…</div>
+  <div id="now" class="now"></div>
+</div>
+
+<aside id="side">
+  <section>
+    <h2>Agents</h2>
+    <ul id="agents"></ul>
+  </section>
+  <section>
+    <h2>View</h2>
+    <label><input id="autoOrbit" type="checkbox" checked /> auto-orbit camera</label>
+    <label><input id="facesOn" type="checkbox" checked /> luminous faces</label>
+    <label><input id="tracesOn" type="checkbox" checked /> history traces</label>
+    <label><input id="autoGallery" type="checkbox" checked /> switch to artwork when the objective completes</label>
+    <label><input id="reduced" type="checkbox" /> reduced motion</label>
+    <p class="hint">Drag to orbit · wheel to zoom · click a vertex to inspect · Space play/pause · G gallery</p>
+  </section>
+  <section>
+    <h2>Music <span class="hint">(optional, off by default; independent of other apps' alerts)</span></h2>
+    <div class="row">
+      <button id="musicToggle">Enable music</button>
+      <label>Volume <input id="volume" type="range" min="0" max="100" value="45" /></label>
+    </div>
+    <div id="music" class="mono hint">music off</div>
+  </section>
+  <section>
+    <h2>Inspect <span class="hint">click a vertex</span></h2>
+    <div id="inspect" class="mono hint">nothing selected</div>
+  </section>
+  <section>
+    <h2>Readout</h2>
+    <div id="readout" class="mono"></div>
+    <div class="row">
+      <button id="savePng">Save PNG</button>
+      <button id="saveManifest">Save manifest</button>
+    </div>
+  </section>
+  <p class="note">Every structure is traceable to a labelled synthetic event. Artistic interpretation of observed activity, not a depiction of thought. All data stays local.</p>
+</aside>
+
+<footer id="transport">
+  <button id="play" title="Play / pause (Space)">Play</button>
+  <button id="restart" title="Restart from the beginning">Restart</button>
+  <label class="speed">Speed <input id="speed" type="range" min="1" max="60" value="8" /><span id="speedv">8×</span></label>
+  <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Timeline" />
+  <span id="time" class="mono">0:00 / 0:00</span>
+  <button id="finale" title="Jump to the finished artwork">Jump to finale</button>
+</footer>
+
+<div id="gallery">
+  <div class="gtitle"><span id="gTask">Finished artwork</span><span id="gMeta" class="mono"></span></div>
+  <div class="gbuttons">
+    <button id="gHistory">History</button>
+    <button id="gPng">Save PNG</button>
+    <button id="gManifest">Manifest</button>
+    <button id="gBack">Back to live</button>
+  </div>
+  <div id="history" class="mono" hidden></div>
+</div>
+
+<script type="module" src="session.js"></script>
+</body>
+</html>
