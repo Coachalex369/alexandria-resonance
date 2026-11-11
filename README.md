@@ -62,28 +62,26 @@ Open http://127.0.0.1:4350 for the main page. Other pages: `/packages/forge/sess
 Live mode reads a local log, `~/.claude/eta/events.jsonl` (override with `VZ_HOOK_LOG`), written by a small Claude
 Code hook, `collector/eta-hook.mjs`. The collector is shared with Alexandria Scoreboard and is installed once per
 machine. It records only timestamps, event kinds, ids, tool names and durations, plus pass/fail counts for test
-runs. It never writes prompts, tool inputs or outputs, or file contents. Resonance only reads the log.
+runs and the short hash of a successful commit (never the message). It never writes prompts, tool inputs or outputs, or file contents. Resonance only reads the log.
 
-**If a collector entry already exists** in `~/.claude/settings.json`, preview the missing hooks, then apply:
+**Installing the collector**
+
+Run the installer yourself from this repository (Claude Code does not let an agent edit its own settings, and you
+should read what you install: `collector/eta-hook.mjs` is short):
 
 ```
-node tools/install-collector-v3.mjs            # dry run: shows what would change
-node tools/install-collector-v3.mjs --apply    # backs up first, only adds missing hooks
+node tools/install-collector-v3.mjs                  # dry run: first-time install or upgrade, lists every change
+node tools/install-collector-v3.mjs --apply          # backs up settings.json and the hook, installs, verifies
+node tools/install-collector-v3.mjs --rollback <stamp>   # undo, using the stamp printed by --apply
 ```
 
-The installer currently needs an existing collector entry under `hooks.Stop`, so it cannot do a first-time install.
-
-**First-time manual install:**
-
-1. Copy `collector/eta-hook.mjs` to `~/.claude/eta/eta-hook.mjs` (create the folder).
-2. Merge the `hooks` section of `collector/hooks.settings-fragment.json` into your `~/.claude/settings.json`.
-3. Replace the placeholder path `~/.claude/eta/eta-hook.mjs` in each `command` with the **absolute path of your own
-   copy**, for example `node "<your home folder>/.claude/eta/eta-hook.mjs"`, written as an absolute path. The placeholder will not be
-   expanded for you.
-4. Restart Claude Code.
-
-Read the hook and the settings fragment before installing; they are short. Claude Code's own protections may stop an
-agent from editing your settings, so make these changes yourself.
+- First-time install: copies the hook to `~/.claude/eta/eta-hook.mjs` and adds the collector's hook entries to
+  `~/.claude/settings.json` (created if missing) with the absolute path of your own home folder.
+- Upgrade: replaces the hook file and adds only missing hook entries. Hooks are never removed, other settings are left
+  untouched, and a newer installed collector is never downgraded (unless `--force`).
+- Backups go to `~/.claude/backups/`. `--rollback` restores both files exactly as they were before that install (later
+  changes to them are reverted too), so use it as an immediate undo.
+- Start a new Claude Code session afterwards; new lines appear in `~/.claude/eta/events.jsonl`.
 
 ## Privacy
 
