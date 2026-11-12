@@ -24,10 +24,12 @@
     "bench:forge": "node tools/forge-bench.js",
     "demo:forge-session": "node tools/forge-demo-session.js",
     "demo:synth": "node tools/synth-recording.js demo/recordings/synthetic-multi-agent.events.jsonl",
-    "demo:record": "node packages/event-engine/bin/engine.js ingest claude-hooks \"%USERPROFILE%/.claude/eta/events.jsonl\" --out demo/recordings/live-hooks.events.jsonl",
+    "demo:record": "node packages/event-engine/bin/engine.js ingest claude-hooks \"%USERPROFILE%/.claude/eta/events.jsonl\" --out data/live-hooks.events.jsonl",
     "engine": "node packages/event-engine/bin/engine.js",
     "protocol:check": "node --test test/protocol-drift.test.js",
-    "collector:install": "node tools/install-collector-v3.mjs"
+    "collector:install": "node tools/install-collector-v3.mjs",
+    "privacy:scan": "node tools/privacy-scan.mjs --all",
+    "privacy:hooks": "node tools/install-privacy-hooks.mjs"
   },
   "engines": {
     "node": ">=22"

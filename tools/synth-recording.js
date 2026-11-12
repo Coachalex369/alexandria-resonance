@@ -22,7 +22,7 @@ let n = 0;
 const events = [];
 const emit = (kind, actor, { payload, parent, task, durationMs, classification, source = "synthetic", observed = true } = {}) => {
   n++;
-  events.push(makeEvent({ id: stableId("evt", "synth", n), ts: t, source, kind, session, actor, payload, parent, task, durationMs, classification, provenance: { observed, adapter: "synthetic@1", confidence: 1 } }));
+  events.push(makeEvent({ id: stableId("evt", "synth", n), ts: t, source, kind, session, actor, payload, parent, task, durationMs, classification, provenance: { observed, adapter: "synthetic@1", confidence: 1, synthetic: true } }));
 };
 const advance = (ms) => { t += ms; };
 const main = { type: "main", model: "claude-fable-5-1", modelConfidence: "declared" };
